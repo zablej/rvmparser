@@ -1,0 +1,92 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RvmParser", "RvmParser\RvmParser.csproj", "{565EFB4E-E087-4C91-BE03-1187D281D1FE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "from-converter", "from-converter", "{E5B3A7B5-5134-4794-B42C-1C3B65FABD42}"
+	ProjectSection(SolutionItems) = preProject
+		from-converter\AddGroupBBox.cs = from-converter\AddGroupBBox.cs
+		from-converter\AddStats.cs = from-converter\AddStats.cs
+		from-converter\Align.cs = from-converter\Align.cs
+		from-converter\Arrays.cs = from-converter\Arrays.cs
+		from-converter\ChunkTiny.cs = from-converter\ChunkTiny.cs
+		from-converter\Colorizer.cs = from-converter\Colorizer.cs
+		from-converter\Common.cs = from-converter\Common.cs
+		from-converter\Connect.cs = from-converter\Connect.cs
+		from-converter\DefineConstants.cs = from-converter\DefineConstants.cs
+		from-converter\DiscardGroups.cs = from-converter\DiscardGroups.cs
+		from-converter\DumpNames.cs = from-converter\DumpNames.cs
+		from-converter\ExportGLTF.cs = from-converter\ExportGLTF.cs
+		from-converter\ExportJson.cs = from-converter\ExportJson.cs
+		from-converter\ExportObj.cs = from-converter\ExportObj.cs
+		from-converter\Flatten.cs = from-converter\Flatten.cs
+		from-converter\GlobalMembers.cs = from-converter\GlobalMembers.cs
+		from-converter\LinAlg.cs = from-converter\LinAlg.cs
+		from-converter\main.cs = from-converter\main.cs
+		from-converter\ParserAtt.cs = from-converter\ParserAtt.cs
+		from-converter\ParserRVM.cs = from-converter\ParserRVM.cs
+		from-converter\Store.cs = from-converter\Store.cs
+		from-converter\StoreVisitor.cs = from-converter\StoreVisitor.cs
+		from-converter\StringFunctions.cs = from-converter\StringFunctions.cs
+		from-converter\Tessellator.cs = from-converter\Tessellator.cs
+		from-converter\TriangulationFactory.cs = from-converter\TriangulationFactory.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3A723EF8-F168-48BD-ABEC-7564C8FE0FE7}"
+	ProjectSection(SolutionItems) = preProject
+		src\AddGroupBBox.cpp = src\AddGroupBBox.cpp
+		src\AddGroupBBox.h = src\AddGroupBBox.h
+		src\AddStats.cpp = src\AddStats.cpp
+		src\AddStats.h = src\AddStats.h
+		src\Align.cpp = src\Align.cpp
+		src\ChunkTiny.cpp = src\ChunkTiny.cpp
+		src\ChunkTiny.h = src\ChunkTiny.h
+		src\Colorizer.cpp = src\Colorizer.cpp
+		src\Colorizer.h = src\Colorizer.h
+		src\Common.cpp = src\Common.cpp
+		src\Common.h = src\Common.h
+		src\Connect.cpp = src\Connect.cpp
+		src\DiscardGroups.cpp = src\DiscardGroups.cpp
+		src\DumpNames.cpp = src\DumpNames.cpp
+		src\DumpNames.h = src\DumpNames.h
+		src\ExportGLTF.cpp = src\ExportGLTF.cpp
+		src\ExportJson.cpp = src\ExportJson.cpp
+		src\ExportObj.cpp = src\ExportObj.cpp
+		src\ExportObj.h = src\ExportObj.h
+		src\Flatten.cpp = src\Flatten.cpp
+		src\Flatten.h = src\Flatten.h
+		src\LinAlg.h = src\LinAlg.h
+		src\LinAlgOps.cpp = src\LinAlgOps.cpp
+		src\LinAlgOps.h = src\LinAlgOps.h
+		src\main.cpp = src\main.cpp
+		src\Parser.h = src\Parser.h
+		src\ParserAtt.cpp = src\ParserAtt.cpp
+		src\ParserRVM.cpp = src\ParserRVM.cpp
+		src\Store.cpp = src\Store.cpp
+		src\Store.h = src\Store.h
+		src\StoreVisitor.h = src\StoreVisitor.h
+		src\Tessellator.cpp = src\Tessellator.cpp
+		src\Tessellator.h = src\Tessellator.h
+		src\TriangulationFactory.cpp = src\TriangulationFactory.cpp
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{565EFB4E-E087-4C91-BE03-1187D281D1FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{565EFB4E-E087-4C91-BE03-1187D281D1FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{565EFB4E-E087-4C91-BE03-1187D281D1FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{565EFB4E-E087-4C91-BE03-1187D281D1FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {33E15BA9-292D-4BAA-9F40-F78CF329414C}
+	EndGlobalSection
+EndGlobal
