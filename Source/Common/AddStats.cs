@@ -94,6 +94,5 @@ namespace Common
         }
 
         private Stats stats;
-
-};
+    }
 }
