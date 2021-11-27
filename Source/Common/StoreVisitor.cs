@@ -30,7 +30,7 @@ namespace Common
 
         public virtual void beginAttributes(Group container) { }
 
-        public virtual void attribute(char? key, char? val) { }
+        public virtual void attribute(string key, string val) { }
 
         public virtual void endAttributes(Group container) { }
 

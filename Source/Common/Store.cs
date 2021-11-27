@@ -90,7 +90,7 @@ namespace Common
         public Triangulation triangulation;
         public Geometry next_comp;            // Next geometry in list of geometries of this composite
         public Connection[] connections = new Connection[6];
-        public char? colorName;
+        public string colorName;
 
         public uint color = 0x202020u;
 
