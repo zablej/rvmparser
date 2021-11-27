@@ -1,11 +1,11 @@
-﻿using Common.Api;
+﻿using Lib.Api;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Common
+namespace Lib
 {
     public class Contour
     {
