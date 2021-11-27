@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common.Api\Common.Api.csproj" />
+    <ProjectReference Include="..\Lib.Api\Lib.Api.csproj" />
   </ItemGroup>
 
 </Project>
