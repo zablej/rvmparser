@@ -12,11 +12,11 @@
 
 //        protected void free();
 
-//        protected void _accommodate(UIntPtr typeSize, UIntPtr count)
+//        protected void _accommodate(uint typeSize, uint count)
 //        {
-//            if (count == UIntPtr.Zero)
+//            if (count == uint.Zero)
 //                return;
-//            if (ptr && count <= ((UIntPtr[])ptr)[-1]) return;
+//            if (ptr && count <= ((uint[])ptr)[-1]) return;
 
 //            free();
 
@@ -29,7 +29,7 @@
 //    public class Buffer<T> : BufferBase
 //    {
 //        public T data() { return (T)ptr; }
-//        public T operator[](UIntPtr ix) 
+//        public T operator[](uint ix) 
 //            { 
 //            return data()[ix]; 
 //}
@@ -37,8 +37,8 @@
 //    {
 //        return (T)ptr;
 //    }
-//    public T operator[](UIntPtr ix) const { return data()[ix]; }
-//public void accommodate(UIntPtr count) { _accommodate(sizeof(T), count); }
+//    public T operator[](uint ix) const { return data()[ix]; }
+//public void accommodate(uint count) { _accommodate(sizeof(T), count); }
 //}
 
 
@@ -53,8 +53,8 @@
 
 //    public ulong? keys = null;
 //    public ulong? vals = null;
-//    public UIntPtr fill = new UIntPtr(0);
-//    public UIntPtr capacity = new UIntPtr(0);
+//    public uint fill = new uint(0);
+//    public uint capacity = new uint(0);
 
 //    public void clear();
 

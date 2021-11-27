@@ -198,7 +198,7 @@ namespace Lib
             first = last = null;
         }
 
-        void insert(T item)
+        public void insert(T item)
         {
             if (first == null)
             {

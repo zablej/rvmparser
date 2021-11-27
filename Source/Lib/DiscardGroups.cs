@@ -14,7 +14,7 @@ namespace Lib
             public uint discarded = 0;
         }
 
-        public void readTagList(Context context, object ptr, size_t size)
+        public void readTagList(Context context, object ptr, uint size)
         {
             var a = (string)ptr;
             var b = a + size;
@@ -67,7 +67,7 @@ namespace Lib
         }
 
 
-        public bool discardGroups(Store store, Logger logger, object ptr, size_t size)
+        public bool discardGroups(Store store, Logger logger, object ptr, uint size)
         {
             Context context;
             context.store = store;
