@@ -20,8 +20,8 @@
 
 //            free();
 
-//            ptr = (char*)xmalloc(typeSize * count + sizeof(size_t)) + sizeof(size_t);
-//            ((size_t*)ptr)[-1] = count;
+//            ptr = (char*)xmalloc(typeSize * count + sizeof(uint)) + sizeof(uint);
+//            ((uint*)ptr)[-1] = count;
 //        }
 
 //    }
