@@ -32,7 +32,7 @@ namespace Lib
                     while (c < d && (d[-1] != '\t')) --d;
 
                     var str = context.store.strings.intern(d, a);
-                    context.discardTags.insert(uint64_t(str), uint64_t(1 + N++));
+                    context.discardTags.insert(ulong(str), ulong(1 + N++));
                 }
                 else
                 {
@@ -46,7 +46,7 @@ namespace Lib
         public void pruneChildren(Context context, Group group)
         {
 
-            ListHeader<Group> groupsNew;
+            ListHeader<Group> groupsNew = new ListHeader<Group>();
             groupsNew.clear();
             for (var child = group.groups.first; child != null;)
             {
@@ -69,7 +69,7 @@ namespace Lib
 
         public bool discardGroups(Store store, Logger logger, object ptr, uint size)
         {
-            Context context;
+            Context context = new Context();
             context.store = store;
             context.logger = logger;
             readTagList(context, ptr, size);

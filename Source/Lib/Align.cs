@@ -12,21 +12,21 @@ namespace Lib
         public Vec3f upWorld;
     };
 
-    public class Context
-    {
-        public Buffer<QueueItem> queue;
-        public Logger logger = null;
-        public Store store = null;
-        public uint front = 0;
-        public uint back = 0;
-        public uint connectedComponents = 0;
-        public uint circularConnections = 0;
-        public uint connections = 0;
-
-    };
-
     public class Align
     {
+        public class Context
+        {
+            public Buffer<QueueItem> queue;
+            public Logger logger = null;
+            public Store store = null;
+            public uint front = 0;
+            public uint back = 0;
+            public uint connectedComponents = 0;
+            public uint circularConnections = 0;
+            public uint connections = 0;
+
+        };
+
         public static void enqueue(Context context, Geometry from, Connection connection, Vec3f upWorld)
         {
             connection.temp = 1;
@@ -42,70 +42,69 @@ namespace Lib
         public static void handleCircularTorus(Context context, Geometry geo, uint offset, Vec3f upWorld)
         {
             var M = geo.M_3x4;
-            var N = Mat3f(M.data);
-            var N_inv = inverse(N);
+            var N = new Mat3f(M.data);
+            var N_inv = LinAlgOps.inverse(N);
             var ct = geo.circularTorus;
-            var c = std.cos(ct.angle);
-            var s = std.sin(ct.angle);
+            var c = Math.Cos(ct.angle);
+            var s = Math.Sin(ct.angle);
 
-            var upLocal = normalize(mul(N_inv, upWorld));
+            var upLocal = Vec3f.normalize(Vec3f.mul(N_inv, upWorld));
 
             if (offset == 1)
             {
                 // rotate back to xz
-                upLocal = Vec3f(c * upLocal.x + s * upLocal.y,
-                                -s * upLocal.x + c * upLocal.y,
+                upLocal = new Vec3f((float)(c * upLocal.x + s * upLocal.y),
+                                (float)(-s * upLocal.x + c * upLocal.y),
                                 upLocal.z);
             }
-            geo.sampleStartAngle = std.atan2(upLocal.z, upLocal.x);
-            if (!std.isfinite(geo.sampleStartAngle))
+            geo.sampleStartAngle = (float)Math.Atan2(upLocal.z, upLocal.x);
+            if (float.IsInfinity(geo.sampleStartAngle))
             {
                 geo.sampleStartAngle = 0;
             }
 
-            var ci = std.cos(geo.sampleStartAngle);
-            var si = std.sin(geo.sampleStartAngle);
-            var co = std.cos(ct.angle);
-            var so = std.sin(ct.angle);
+            var ci = (float)Math.Cos(geo.sampleStartAngle);
+            var si = (float)Math.Sin(geo.sampleStartAngle);
+            var co = (float)Math.Cos(ct.angle);
+            var so = (float)Math.Sin(ct.angle);
 
-            Vec3f upNew(ci, 0.f, si);
+            Vec3f upNew = new Vec3f(ci, 0f, si);
 
             var upNewWorld = new Vec3f[2];
-            upNewWorld[0] = mul(N, upNew);
-            upNewWorld[1] = mul(N, Vec3f(c * upNew.x - s * upNew.y,
-                                         s * upNew.x + c * upNew.y,
+            upNewWorld[0] = Vec3f.mul(N, upNew);
+            upNewWorld[1] = Vec3f.mul(N, new Vec3f((float)(c * upNew.x - s * upNew.y),
+                                         (float)(s * upNew.x + c * upNew.y),
                                          upNew.z));
 
-            if (true)
-            {
-                Vec3f p0(ct.radius* ci +ct.offset,
-               0.f,
-               ct.radius* si);
 
-                Vec3f p1((ct.radius* ci +ct.offset) *co,
+            var p0 = new Vec3f(ct.radius * ci + ct.offset,
+                               0f,
+                               ct.radius * si);
+
+            var p1 = new Vec3f((ct.radius* ci +ct.offset) *co,
                (ct.radius * ci + ct.offset) * so,
                ct.radius* si);
 
 
-                var a0 = mul(geo.M_3x4, p0);
-                var b0 = a0 + 1.5f * ct.radius * upNewWorld[0];
+            var a0 = Vec3f.mul(geo.M_3x4, p0);
+            var b0 = a0 + 1.5f * ct.radius * upNewWorld[0];
 
-                var a1 = mul(geo.M_3x4, p1);
-                var b1 = a1 + 1.5f * ct.radius * upNewWorld[1];
+            var a1 = Vec3f.mul(geo.M_3x4, p1);
+            var b1 = a1 + 1.5f * ct.radius * upNewWorld[1];
 
-                //if (context.front == 1) {
-                //  if (geo.connections[0]) context.store.addDebugLine(a0.data, b0.data, 0x00ffff);
-                //  if (geo.connections[1]) context.store.addDebugLine(a1.data, b1.data, 0x00ff88);
-                //}
-                //else if (offset == 0) {
-                //  if (geo.connections[0]) context.store.addDebugLine(a0.data, b0.data, 0x0000ff);
-                //  if (geo.connections[1]) context.store.addDebugLine(a1.data, b1.data, 0x000088);
-                //}
-                //else {
-                //  if (geo.connections[0]) context.store.addDebugLine(a0.data, b0.data, 0x000088);
-                //  if (geo.connections[1]) context.store.addDebugLine(a1.data, b1.data, 0x0000ff);
-                //}
-            }
+            //if (context.front == 1) {
+            //  if (geo.connections[0]) context.store.addDebugLine(a0.data, b0.data, 0x00ffff);
+            //  if (geo.connections[1]) context.store.addDebugLine(a1.data, b1.data, 0x00ff88);
+            //}
+            //else if (offset == 0) {
+            //  if (geo.connections[0]) context.store.addDebugLine(a0.data, b0.data, 0x0000ff);
+            //  if (geo.connections[1]) context.store.addDebugLine(a1.data, b1.data, 0x000088);
+            //}
+            //else {
+            //  if (geo.connections[0]) context.store.addDebugLine(a0.data, b0.data, 0x000088);
+            //  if (geo.connections[1]) context.store.addDebugLine(a1.data, b1.data, 0x0000ff);
+            //}
+
 
             for (uint k = 0; k < 2; k++)
             {
@@ -122,21 +121,21 @@ namespace Lib
 
         public static void handleCylinderSnoutAndDish(Context context, Geometry geo, uint offset, Vec3f upWorld)
         {
-            var M_inv = inverse(Mat3f(geo.M_3x4.data));
+            var M_inv = LinAlgOps.inverse(new Mat3f(geo.M_3x4.data));
 
-            var upn = normalize(upWorld);
+            var upn = Vec3f.normalize(upWorld);
 
-            var upLocal = mul(M_inv, upn);
-            upLocal.z = 0.f;  // project to xy-plane
+            var upLocal = Vec3f.mul(M_inv, upn);
+            upLocal.z = 0f;  // project to xy-plane
 
-            geo.sampleStartAngle = std.atan2(upLocal.y, upLocal.x);
-            if (!std.isfinite(geo.sampleStartAngle))
+            geo.sampleStartAngle = (float)Math.Atan2(upLocal.y, upLocal.x);
+            if (float.IsInfinity(geo.sampleStartAngle))
             {
-                geo.sampleStartAngle = 0.f;
+                geo.sampleStartAngle = 0f;
             }
 
-            Vec3f upNewWorld = mul(Mat3f(geo.M_3x4.data), Vec3f(std.cos(geo.sampleStartAngle),
-                                                                 std.sin(geo.sampleStartAngle),
+            Vec3f upNewWorld = Vec3f.mul(new Mat3f(geo.M_3x4.data), new Vec3f((float)Math.Cos(geo.sampleStartAngle),
+                                                                 (float)Math.Sin(geo.sampleStartAngle),
                                                                  0));
 
             for (uint k = 0; k < 2; k++)
@@ -194,7 +193,7 @@ namespace Lib
             var context = new Context();
             context.logger = logger;
             context.store = store;
-            var time0 = std.chrono.high_resolution_clock.now();
+            var stopwatch = Stopwatch.StartNew();
             for (var connection = store.getFirstConnection(); connection != null; connection = connection.next)
             {
                 connection.temp = 0;
@@ -210,23 +209,23 @@ namespace Lib
             context.queue.accommodate(context.connections);
             for (var connection = store.getFirstConnection(); connection != null; connection = connection.next)
             {
-                if (connection.temp != 0 || connection.hasFlag(Connection.Flags.HasRectangularSide)) 
+                if (connection.temp != 0 || connection.hasFlag(Connection.Flags.HasRectangularSide))
                     continue;
 
                 // Create an arbitrary vector in plane of intersection as seed.
                 var d = connection.d;
                 Vec3f b;
-                if (std.abs(d.x) > std.abs(d.y) && std.abs(d.x) > std.abs(d.z))
+                if (Math.Abs(d.x) > Math.Abs(d.y) && Math.Abs(d.x) > Math.Abs(d.z))
                 {
-                    b = Vec3f(0, 1, 0);
+                    b = new Vec3f(0, 1, 0);
                 }
                 else
                 {
-                    b = Vec3f(1, 0, 0);
+                    b = new Vec3f(1, 0, 0);
                 }
 
-                var upWorld = normalize(cross(d, b));
-                Debug.Assert(std.isfinite(lengthSquared(upWorld)));
+                var upWorld = Vec3f.normalize(Vec3f.cross(d, b));
+                Debug.Assert(!float.IsInfinity(Vec3f.lengthSquared(upWorld)));
 
                 context.front = 0;
                 context.back = 0;
@@ -238,8 +237,8 @@ namespace Lib
 
                 context.connectedComponents++;
             }
-            var time1 = std.chrono.high_resolution_clock.now();
-            var e0 = std.chrono.duration_cast<std.chrono.milliseconds>((time1 - time0)).count();
+            stopwatch.Stop();
+            var e0 = stopwatch.ElapsedMilliseconds;
 
             logger(0, "%d connected components in %d circular connections (%lldms).", context.connectedComponents, context.circularConnections, e0);
         }
