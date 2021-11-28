@@ -100,7 +100,7 @@ public class Map
     }
     public ulong get(ulong key)
     {
-        uint64_t rv = 0;
+        ulong rv = 0;
         get(rv, key);
         return rv;
     }
@@ -161,8 +161,8 @@ public class StringInterning
 {
     public Map map;
 
-    public char intern(char a, char b);
-    public char intern(char str);  // null terminanted
+    public string intern(char a, char b);
+    public string intern(string str);  // null terminanted
 }
 
 public static class Common
